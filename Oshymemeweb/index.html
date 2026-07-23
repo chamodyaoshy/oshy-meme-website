@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oshy Meme Hub Official</title>
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #0f172a; color: #f8fafc; margin: 0; padding: 0; }
+        
+        .navbar { background: #1e293b; padding: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); position: sticky; top: 0; z-index: 100; }
+        .navbar h1 { margin: 0; color: #facc15; font-size: 2rem; }
+        .navbar p { margin: 5px 0 0 0; color: #94a3b8; font-size: 0.9rem; }
+        
+        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+        .section-title { font-size: 1.5rem; color: #38bdf8; border-bottom: 2px solid #334155; padding-bottom: 8px; margin-bottom: 20px; text-align: center; }
+        
+        .about-card { background: #1e293b; padding: 25px; border-radius: 12px; margin-bottom: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-align: center; line-height: 1.6; }
+        .about-card p { color: #cbd5e1; font-size: 1.05rem; margin: 0; }
+        
+        .meme-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .meme-card { background: #1e293b; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.3s ease; }
+        .meme-card:hover { transform: translateY(-5px); }
+        .meme-card img { width: 100%; height: 280px; object-fit: cover; display: block; }
+        .meme-caption { padding: 12px; text-align: center; color: #e2e8f0; font-weight: 500; font-size: 0.95rem; }
+        
+        .social-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 40px; }
+        .social-btn { text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; color: white; display: flex; align-items: center; gap: 10px; transition: 0.3s; font-size: 1rem; }
+        .fb { background-color: #1877f2; }
+        .tiktok { background-color: #000000; border: 1px solid #334155; }
+        .insta { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .social-btn:hover { opacity: 0.9; transform: scale(1.05); }
+        
+        .footer { text-align: center; padding: 20px; color: #64748b; font-size: 0.85rem; border-top: 1px solid #1e293b; }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <h1>Oshy Meme Hub 🔥</h1>
+        <p>The Official Website for Unlimited Laughs & Memes</p>
+    </div>
+    
+    <div class="container">
+        <div class="section-title">📌 About Oshy Memes</div>
+        <div class="about-card">
+            <p>Welcome to <b>Oshy Memes</b>! මෙතනින් ඔයාට දිනපතා අලුත්ම, ආතල් සහ Trendy Memes බලාගන්න පුළුවන්. Facebook, TikTok සහ Instagram හරහා අපේ Meme Page එකට එකතු වෙලා අලුත්ම Memes සේරම එකම තැනකින් ලබාගන්න!</p>
+        </div>
+        
+        <div class="section-title">🖼️ Latest Memes</div>
+        <div class="meme-grid">
+            <div class="meme-card">
+                <img src="https://picsum.photos/id/1025/500/500" alt="Meme 1">
+                <div class="meme-caption">Meme #1 - Daily Laughs</div>
+            </div>
+            <div class="meme-card">
+                <img src="https://picsum.photos/id/237/500/500" alt="Meme 2">
+                <div class="meme-caption">Meme #2 - Tag Your Friends</div>
+            </div>
+            <div class="meme-card">
+                <img src="https://picsum.photos/id/1062/500/500" alt="Meme 3">
+                <div class="meme-caption">Meme #3 - Mood Today</div>
+            </div>
+        </div>
+        
+        <div class="section-title">🌐 Follow Us On Social Media</div>
+        <div class="social-container">
+            <a href="https://facebook.com" target="_blank" class="social-btn fb">Facebook Page</a>
+            <a href="https://tiktok.com" target="_blank" class="social-btn tiktok">TikTok Profile</a>
+            <a href="https://instagram.com" target="_blank" class="social-btn insta">Instagram Page</a>
+        </div>
+    </div>
+    
+    <div class="footer">
+        © 2026 Oshy Memes. All Rights Reserved.
+    </div>
+
+</body>
+</html>
