@@ -63,23 +63,6 @@
         }
         .nav-cta:hover { transform: scale(1.05); }
         .container { max-width: 1020px; margin: 30px auto; padding: 0 20px; position: relative; z-index: 1; }
-        /* Viral Stats Bar */
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin-bottom: 32px;
-        }
-        .stat-box {
-            background: rgba(30, 41, 59, 0.65);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(148, 163, 184, 0.18);
-            border-radius: 14px;
-            padding: 16px;
-            text-align: center;
-        }
-        .stat-num { font-size: 1.45rem; font-weight: 800; color: #facc15; }
-        .stat-label { font-size: 0.85rem; color: #94a3b8; margin-top: 4px; }
         .section-title {
             font-size: 1.5rem;
             color: #38bdf8;
@@ -214,52 +197,35 @@
             font-size: 0.94rem;
         }
         .form-control:focus { outline: none; border-color: #facc15; }
-        .booking-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
         .submit-btn {
             background: #facc15;
             color: #090d16;
             border: none;
-            padding: 11px 22px;
+            padding: 12px 24px;
             border-radius: 9px;
             font-weight: 800;
             cursor: pointer;
             font-size: 0.95rem;
+            transition: transform 0.2s ease, filter 0.2s ease;
         }
-        .wa-btn {
-            background: #22c55e;
-            color: #052e16;
-            border: none;
-            padding: 11px 20px;
-            border-radius: 9px;
-            font-weight: 800;
-            cursor: pointer;
-            font-size: 0.95rem;
-        }
-        .copy-btn {
-            background: rgba(56, 189, 248, 0.2);
-            color: #38bdf8;
-            border: 1px solid rgba(56, 189, 248, 0.45);
-            padding: 10px 16px;
-            border-radius: 9px;
-            font-weight: 700;
-            cursor: pointer;
-            font-size: 0.88rem;
-        }
-        .booking-preview {
-            margin-top: 18px;
-            padding: 16px;
-            border-radius: 12px;
-            background: rgba(15, 23, 42, 0.88);
-            border: 1px dashed rgba(250, 204, 21, 0.5);
+        .submit-btn:hover { transform: scale(1.03); filter: brightness(1.06); }
+        .submit-btn:disabled { opacity: 0.65; cursor: not-allowed; }
+        .booking-status {
+            margin-top: 16px;
+            padding: 14px 16px;
+            border-radius: 10px;
+            font-size: 0.93rem;
             display: none;
         }
-        .booking-preview pre {
-            white-space: pre-wrap;
-            margin: 0 0 12px 0;
-            color: #e2e8f0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 0.92rem;
-            line-height: 1.5;
+        .booking-status.success {
+            background: rgba(34, 197, 94, 0.16);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            color: #86efac;
+        }
+        .booking-status.error {
+            background: rgba(239, 68, 68, 0.16);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            color: #fca5a5;
         }
         /* Social Media Buttons Layout */
         .social-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 40px; }
@@ -294,13 +260,6 @@
     </div>
 
     <div class="container">
-
-        <!-- VIRAL STATS STRIP -->
-        <div class="stats-bar">
-            <div class="stat-box"><div class="stat-num">5M+</div><div class="stat-label">Views in 42 Days</div></div>
-            <div class="stat-box"><div class="stat-num">20K+</div><div class="stat-label">Meme Page Followers</div></div>
-            <div class="stat-box"><div class="stat-num">24/7</div><div class="stat-label">Fresh Meme Dose</div></div>
-        </div>
 
         <!-- 2. ABOUT ME / PAGE DESCRIPTION SECTION -->
         <div class="section-title">📌 About Oshy Memes</div>
@@ -358,7 +317,7 @@
             </div>
         </div>
 
-        <!-- 4. PROMOTION BOOKING SECTION -->
+        <!-- 4. PROMOTION BOOKING SECTION (DIRECT TO YOUR EMAIL) -->
         <div id="book-promo" class="section-title">💼 Book a Promotion</div>
         <div class="promo-grid">
             <div class="promo-pkg">
@@ -379,25 +338,30 @@
         </div>
 
         <div class="booking-card">
-            <form id="promoBookingForm" onsubmit="handleBookingSubmit(event)">
+            <!-- REPLACE YOUR_EMAIL@gmail.com WITH YOUR ACTUAL GMAIL ADDRESS -->
+            <form id="promoBookingForm" action="https://formsubmit.co/ajax/YOUR_EMAIL@gmail.com" method="POST" onsubmit="handleBookingSubmit(event)">
+                <input type="hidden" name="_subject" value="🔥 New Promotion Booking - Oshy Meme Hub">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+
                 <div class="form-row">
                     <div class="form-group">
                         <label for="clientName">Your Name *</label>
-                        <input type="text" id="clientName" class="form-control" placeholder="e.g., Kasun Perera" required>
+                        <input type="text" id="clientName" name="Client Name" class="form-control" placeholder="e.g., Kasun Perera" required>
                     </div>
                     <div class="form-group">
                         <label for="brandName">Brand / Page / Business Name *</label>
-                        <input type="text" id="brandName" class="form-control" placeholder="e.g., Urban Bites LK" required>
+                        <input type="text" id="brandName" name="Brand or Page" class="form-control" placeholder="e.g., Urban Bites LK" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="contactInfo">WhatsApp / Phone / Email *</label>
-                        <input type="text" id="contactInfo" class="form-control" placeholder="e.g., 07X XXX XXXX or email" required>
+                        <label for="clientEmail">Your Email Address *</label>
+                        <input type="email" id="clientEmail" name="email" class="form-control" placeholder="e.g., client@gmail.com" required>
                     </div>
                     <div class="form-group">
                         <label for="promoPackage">Promotion Type</label>
-                        <select id="promoPackage" class="form-control">
+                        <select id="promoPackage" name="Promotion Package" class="form-control">
                             <option value="Sponsored Meme Post">Sponsored Meme Post</option>
                             <option value="Story / Reel Shoutout">Story / Reel Shoutout</option>
                             <option value="Event / Campaign Combo">Event / Campaign Combo</option>
@@ -405,21 +369,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="promoNotes">Campaign Details / Preferred Date</label>
-                    <textarea id="promoNotes" rows="3" class="form-control" placeholder="Tell us what you are promoting, target link, or preferred posting date..."></textarea>
+                    <label for="promoNotes">Campaign Details / Preferred Date *</label>
+                    <textarea id="promoNotes" name="Campaign Details" rows="3" class="form-control" placeholder="Tell us what you are promoting, target link, or preferred posting date..." required></textarea>
                 </div>
-                <div class="booking-actions">
-                    <button type="submit" class="submit-btn">Generate Booking Request</button>
-                </div>
+                <button type="submit" id="bookingSubmitBtn" class="submit-btn">📩 Send Promotion Booking</button>
             </form>
 
-            <div id="bookingPreview" class="booking-preview">
-                <pre id="bookingSummaryText"></pre>
-                <div class="booking-actions">
-                    <button type="button" class="copy-btn" onclick="copyBookingText()">📋 Copy Details</button>
-                    <button type="button" class="wa-btn" onclick="sendBookingWhatsApp()">💬 Send on WhatsApp</button>
-                </div>
-            </div>
+            <div id="bookingStatus" class="booking-status"></div>
         </div>
 
         <!-- 5. SOCIAL MEDIA LINKS SECTION -->
@@ -437,9 +393,6 @@
     </div>
 
     <script>
-        const WHATSAPP_NUMBER = '94700000000'; // Replace with your WhatsApp number (94 + number, no +)
-        let latestBookingMessage = '';
-
         function filterMemes(category, btn) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
@@ -466,23 +419,42 @@
             select.value = pkgName;
             document.getElementById('promoBookingForm').scrollIntoView({ behavior: 'smooth' });
         }
-        function handleBookingSubmit(event) {
+        async function handleBookingSubmit(event) {
             event.preventDefault();
-            const name = document.getElementById('clientName').value.trim();
-            const brand = document.getElementById('brandName').value.trim();
-            const contact = document.getElementById('contactInfo').value.trim();
-            const pkg = document.getElementById('promoPackage').value;
-            const notes = document.getElementById('promoNotes').value.trim() || 'Not specified';
+            const form = event.target;
+            const btn = document.getElementById('bookingSubmitBtn');
+            const statusBox = document.getElementById('bookingStatus');
 
-            latestBookingMessage =
-                '🔥 Oshy Meme Hub - Promotion Booking Request\n'
-                + '• Client: ' + name + '\n'
-                + '• Brand/Page: ' + brand + '\n'
-                + '• Contact: ' + contact + '\n'
-                + '• Package: ' + pkg + '\n'
-                + '• Notes/Date: ' + notes;
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+            statusBox.style.display = 'none';
 
-            document.getElementById('bookingSummaryText').textContent = latestBookingMessage;
-            const preview = document.getElementById('bookingPreview');
-            preview.style.display = 'block';
-            preview.scrollIntoView({ behavior: 'smooth
+            try {
+                const formData = new FormData(form);
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+                const result = await response.json();
+
+                if (response.ok && (result.success === 'true' || result.success === true)) {
+                    statusBox.className = 'booking-status success';
+                    statusBox.textContent = '✅ Booking request sent! We received your details and will reply to your email soon.';
+                    statusBox.style.display = 'block';
+                    form.reset();
+                } else {
+                    throw new Error(result.message || 'Submission failed');
+                }
+            } catch (err) {
+                statusBox.className = 'booking-status error';
+                statusBox.textContent = '⚠️ Could not send right now. Please try again in a moment.';
+                statusBox.style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '📩 Send Promotion Booking';
+            }
+        }
+    </script>
+</body>
+</html>
