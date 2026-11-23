@@ -1,33 +1,42 @@
-# 🎭 Oshy Meme Hub (Official Website)
+\# Oshy Meme Hub 🔥
 
-Welcome to the official repository for **Oshy Meme Hub**! This is a modern, fast, and responsive web application built to bring you the best and latest memes, trending content, and daily laughs.
 
-🌐 **Live Demo:** [https://oshymemehub.netlify.app](https://oshymemehub.netlify.app)
 
----
+The official web portal for \*\*Oshy Memes\*\* — featuring curated viral memes, interactive reactions, category filtering, social media links, and a direct email-integrated promotion booking system.
 
-## ✨ Features
 
-- ⚡ **Fast & Responsive Design:** Optimized for mobile, tablet, and desktop devices.
-- 🖼️ **Trendy Meme Gallery:** Eye-catching grid layout showcasing daily fresh memes.
-- 📱 **Social Media Integration:** Direct connections to official Facebook, TikTok, and Instagram handles.
-- 🎨 **Modern Dark UI:** Stylish slate-dark theme designed for comfortable viewing.
-- 🔄 **Continuous Deployment:** Integrated with GitHub and Netlify for instant updates.
 
----
+\## ✨ Key Features
 
-## 🛠️ Tech Stack
+\- \*\*Modern Dark Glassmorphism UI:\*\* Animated gradient background with floating ambient glow orbs and responsive glass-style cards.
 
-- **Frontend:** HTML5, CSS3 (Flexbox & CSS Grid), JavaScript
-- **Hosting & Deployment:** [Netlify](https://www.netlify.com/)
-- **Version Control:** [Git](https://git-scm.com/) / [GitHub](https://github.com/)
+\- \*\*Interactive Meme Gallery:\*\* Filter memes by category (\*All\*, \*Trending\*, \*Relatable\*, \*Daily Laughs\*), react with live emoji counters, and copy shareable captions with one click.
 
----
+\- \*\*Direct Promotion Booking System:\*\* Brands, creators, and event organizers can select promotion packages (\*Sponsored Meme Post\*, \*Story / Reel Shoutout\*, \*Event / Campaign Combo\*) and submit requests directly to email without a custom backend server.
 
-## 🚀 How to Run Locally
+\- \*\*Social Media Hub:\*\* Quick-access links to official Facebook, TikTok, and Instagram pages.
 
-If you want to view or contribute to this project locally on your machine:
+\- \*\*Mobile-First \& Lightweight:\*\* Built as a single, zero-dependency static `index.html` file ready for instant deployment on Netlify or GitHub Pages.
 
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/chamodyaoshy/oshy-meme-website.git](https://github.com/chamodyaoshy/oshy-meme-website.git)
+
+
+\## 🛠️ Tech Stack
+
+\- \*\*Frontend:\*\* HTML5, CSS3 (Custom Animations \& Glassmorphism), Vanilla JavaScript
+
+\- \*\*Form Handling:\*\* FormSubmit AJAX Email Integration
+
+\- \*\*Hosting / Deployment:\*\* GitHub \& Netlify
+
+
+
+\## 📂 Project Structure
+
+```text
+
+oshy-meme-website/
+
+├── index.html      # Complete responsive web application
+
+└── README.md       # Project documentation
+
