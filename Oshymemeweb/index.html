@@ -3,77 +3,486 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oshy Meme Hub Official</title>
+    <title>Oshy Meme Official</title>
     <style>
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #0f172a; color: #f8fafc; margin: 0; padding: 0; }
-        
-        .navbar { background: #1e293b; padding: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); position: sticky; top: 0; z-index: 100; }
-        .navbar h1 { margin: 0; color: #facc15; font-size: 2rem; }
-        .navbar p { margin: 5px 0 0 0; color: #94a3b8; font-size: 0.9rem; }
-        
-        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
-        .section-title { font-size: 1.5rem; color: #38bdf8; border-bottom: 2px solid #334155; padding-bottom: 8px; margin-bottom: 20px; text-align: center; }
-        
-        .about-card { background: #1e293b; padding: 25px; border-radius: 12px; margin-bottom: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-align: center; line-height: 1.6; }
-        .about-card p { color: #cbd5e1; font-size: 1.05rem; margin: 0; }
-        
-        .meme-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; }
-        .meme-card { background: #1e293b; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.3s ease; }
-        .meme-card:hover { transform: translateY(-5px); }
-        .meme-card img { width: 100%; height: 280px; object-fit: cover; display: block; }
-        .meme-caption { padding: 12px; text-align: center; color: #e2e8f0; font-weight: 500; font-size: 0.95rem; }
-        
+        html { scroll-behavior: smooth; }
+        body {
+            background: radial-gradient(circle at 15% 20%, rgba(250, 204, 21, 0.14), transparent 35%),
+                        radial-gradient(circle at 85% 25%, rgba(236, 72, 153, 0.16), transparent 40%),
+                        radial-gradient(circle at 50% 85%, rgba(56, 189, 248, 0.15), transparent 45%),
+                        linear-gradient(135deg, #090d16 0%, #111827 50%, #0b1120 100%);
+            background-size: 140% 140%;
+            animation: bgShift 14s ease infinite alternate;
+            color: #f8fafc;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        @keyframes bgShift {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+        /* Floating Meme Glow Orbs */
+        .orb { position: fixed; border-radius: 50%; filter: blur(85px); z-index: 0; pointer-events: none; opacity: 0.45; }
+        .orb-1 { width: 280px; height: 280px; background: #facc15; top: 8%; left: -60px; animation: floatOrb 9s ease-in-out infinite; }
+        .orb-2 { width: 320px; height: 320px; background: #a855f7; top: 45%; right: -80px; animation: floatOrb 11s ease-in-out infinite reverse; }
+        .orb-3 { width: 240px; height: 240px; background: #22d3ee; bottom: 5%; left: 25%; animation: floatOrb 10s ease-in-out infinite; }
+        @keyframes floatOrb {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-22px) scale(1.06); }
+        }
+        /* Navigation Header Styling */
+        .navbar {
+            background: rgba(15, 23, 42, 0.78);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(250, 204, 21, 0.2);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar h1 { margin: 0; color: #facc15; font-size: 2rem; text-shadow: 0 0 18px rgba(250, 204, 21, 0.25); }
+        .navbar p { margin: 6px 0 0 0; color: #cbd5e1; font-size: 0.92rem; }
+        .nav-cta {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 18px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #facc15, #f59e0b);
+            color: #090d16;
+            font-weight: 800;
+            font-size: 0.88rem;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+        .nav-cta:hover { transform: scale(1.05); }
+        .container { max-width: 1020px; margin: 30px auto; padding: 0 20px; position: relative; z-index: 1; }
+        /* Viral Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 32px;
+        }
+        .stat-box {
+            background: rgba(30, 41, 59, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            border-radius: 14px;
+            padding: 16px;
+            text-align: center;
+        }
+        .stat-num { font-size: 1.45rem; font-weight: 800; color: #facc15; }
+        .stat-label { font-size: 0.85rem; color: #94a3b8; margin-top: 4px; }
+        .section-title {
+            font-size: 1.5rem;
+            color: #38bdf8;
+            border-bottom: 2px solid rgba(148, 163, 184, 0.22);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        /* About Section Styling */
+        .about-card {
+            background: rgba(30, 41, 59, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            padding: 25px;
+            border-radius: 14px;
+            margin-bottom: 35px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            line-height: 1.65;
+        }
+        .about-card p { color: #e2e8f0; font-size: 1.03rem; margin: 0; }
+        /* Category Filter Pills */
+        .filter-bar { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; }
+        .filter-btn {
+            background: rgba(30, 41, 59, 0.75);
+            color: #e2e8f0;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            padding: 8px 16px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.25s ease;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: #facc15;
+            color: #0f172a;
+            border-color: #facc15;
+        }
+        /* Meme Gallery Grid Layout */
+        .meme-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(285px, 1fr)); gap: 22px; margin-bottom: 40px; }
+        .meme-card {
+            background: rgba(30, 41, 59, 0.72);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .meme-card:hover { transform: translateY(-6px); border-color: rgba(250, 204, 21, 0.55); }
+        .meme-card img { width: 100%; height: 270px; object-fit: cover; display: block; }
+        .meme-body { padding: 14px; }
+        .meme-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.14);
+            padding: 3px 10px;
+            border-radius: 999px;
+            margin-bottom: 8px;
+        }
+        .meme-caption { color: #f1f5f9; font-weight: 600; font-size: 0.98rem; margin-bottom: 12px; }
+        .reaction-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .react-btn {
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            color: #f8fafc;
+            padding: 5px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: transform 0.15s ease, background 0.2s ease;
+        }
+        .react-btn:hover { transform: scale(1.07); background: rgba(250, 204, 21, 0.2); }
+        .share-btn {
+            background: #22c55e;
+            color: #052e16;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.82rem;
+        }
+        .share-btn:hover { filter: brightness(1.08); }
+        /* Promotion Booking Section */
+        .promo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-bottom: 24px; }
+        .promo-pkg {
+            background: rgba(30, 41, 59, 0.68);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 14px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+        .promo-pkg:hover { transform: translateY(-4px); border-color: #facc15; }
+        .promo-pkg h3 { margin: 0 0 8px 0; color: #facc15; font-size: 1.15rem; }
+        .promo-pkg p { margin: 0 0 14px 0; color: #cbd5e1; font-size: 0.9rem; line-height: 1.5; }
+        .select-pkg-btn {
+            background: rgba(56, 189, 248, 0.16);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.45);
+            padding: 7px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        .select-pkg-btn:hover { background: #38bdf8; color: #090d16; }
+        .booking-card {
+            background: rgba(30, 41, 59, 0.72);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(250, 204, 21, 0.25);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+        }
+        .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 14px; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+        .form-group label { font-size: 0.88rem; font-weight: 600; color: #e2e8f0; }
+        .form-control {
+            width: 100%;
+            padding: 11px 13px;
+            border-radius: 9px;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            background: rgba(15, 23, 42, 0.82);
+            color: #f8fafc;
+            font-size: 0.94rem;
+        }
+        .form-control:focus { outline: none; border-color: #facc15; }
+        .booking-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+        .submit-btn {
+            background: #facc15;
+            color: #090d16;
+            border: none;
+            padding: 11px 22px;
+            border-radius: 9px;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        .wa-btn {
+            background: #22c55e;
+            color: #052e16;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 9px;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        .copy-btn {
+            background: rgba(56, 189, 248, 0.2);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.45);
+            padding: 10px 16px;
+            border-radius: 9px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.88rem;
+        }
+        .booking-preview {
+            margin-top: 18px;
+            padding: 16px;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.88);
+            border: 1px dashed rgba(250, 204, 21, 0.5);
+            display: none;
+        }
+        .booking-preview pre {
+            white-space: pre-wrap;
+            margin: 0 0 12px 0;
+            color: #e2e8f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+        /* Social Media Buttons Layout */
         .social-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 40px; }
-        .social-btn { text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; color: white; display: flex; align-items: center; gap: 10px; transition: 0.3s; font-size: 1rem; }
+        .social-btn { text-decoration: none; padding: 12px 25px; border-radius: 10px; font-weight: bold; color: white; display: flex; align-items: center; gap: 10px; transition: 0.3s; font-size: 1rem; }
         .fb { background-color: #1877f2; }
-        .tiktok { background-color: #000000; border: 1px solid #334155; }
+        .tiktok { background-color: #090d16; border: 1px solid #475569; }
         .insta { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-        .social-btn:hover { opacity: 0.9; transform: scale(1.05); }
-        
-        .footer { text-align: center; padding: 20px; color: #64748b; font-size: 0.85rem; border-top: 1px solid #1e293b; }
+        .social-btn:hover { opacity: 0.92; transform: scale(1.05); }
+        /* Footer Styling */
+        .footer {
+            text-align: center;
+            padding: 22px;
+            color: #94a3b8;
+            font-size: 0.88rem;
+            border-top: 1px solid rgba(148, 163, 184, 0.18);
+            background: rgba(15, 23, 42, 0.65);
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
 
+    <!-- 1. WEBSITE HEADER / TITLE -->
     <div class="navbar">
         <h1>Oshy Meme Hub 🔥</h1>
-        <p>The Official Website for Unlimited Laughs & Memes</p>
+        <p>The Official Website for Unlimited Laughs &amp; Viral Memes</p>
+        <a href="#book-promo" class="nav-cta">💼 Book a Promotion</a>
     </div>
-    
+
     <div class="container">
+
+        <!-- VIRAL STATS STRIP -->
+        <div class="stats-bar">
+            <div class="stat-box"><div class="stat-num">5M+</div><div class="stat-label">Views in 42 Days</div></div>
+            <div class="stat-box"><div class="stat-num">20K+</div><div class="stat-label">Meme Page Followers</div></div>
+            <div class="stat-box"><div class="stat-num">24/7</div><div class="stat-label">Fresh Meme Dose</div></div>
+        </div>
+
+        <!-- 2. ABOUT ME / PAGE DESCRIPTION SECTION -->
         <div class="section-title">📌 About Oshy Memes</div>
         <div class="about-card">
             <p>Welcome to <b>Oshy Memes</b>! මෙතනින් ඔයාට දිනපතා අලුත්ම, ආතල් සහ Trendy Memes බලාගන්න පුළුවන්. Facebook, TikTok සහ Instagram හරහා අපේ Meme Page එකට එකතු වෙලා අලුත්ම Memes සේරම එකම තැනකින් ලබාගන්න!</p>
         </div>
-        
+
+        <!-- 3. MEME GALLERY SECTION -->
         <div class="section-title">🖼️ Latest Memes</div>
+        <div class="filter-bar">
+            <button type="button" class="filter-btn active" onclick="filterMemes('all', this)">All Memes</button>
+            <button type="button" class="filter-btn" onclick="filterMemes('trending', this)">🔥 Trending</button>
+            <button type="button" class="filter-btn" onclick="filterMemes('relatable', this)">💀 Relatable</button>
+            <button type="button" class="filter-btn" onclick="filterMemes('daily', this)">😂 Daily Laughs</button>
+        </div>
+
         <div class="meme-grid">
-            <div class="meme-card">
+            <div class="meme-card" data-category="daily">
                 <img src="https://picsum.photos/id/1025/500/500" alt="Meme 1">
-                <div class="meme-caption">Meme #1 - Daily Laughs</div>
+                <div class="meme-body">
+                    <span class="meme-tag">Daily Laughs</span>
+                    <div class="meme-caption">Meme #1 - Daily Laughs</div>
+                    <div class="reaction-row">
+                        <button type="button" class="react-btn" onclick="bumpCount(this)">😂 <span>124</span></button>
+                        <button type="button" class="react-btn" onclick="bumpCount(this)">🔥 <span>58</span></button>
+                        <button type="button" class="share-btn" onclick="shareMeme('Meme #1 - Daily Laughs')">Share</button>
+                    </div>
+                </div>
             </div>
-            <div class="meme-card">
+
+            <div class="meme-card" data-category="trending">
                 <img src="https://picsum.photos/id/237/500/500" alt="Meme 2">
-                <div class="meme-caption">Meme #2 - Tag Your Friends</div>
+                <div class="meme-body">
+                    <span class="meme-tag">Trending</span>
+                    <div class="meme-caption">Meme #2 - Tag Your Friends</div>
+                    <div class="reaction-row">
+                        <button type="button" class="react-btn" onclick="bumpCount(this)">😂 <span>210</span></button>
+                        <button type="button" class="react-btn" onclick="bumpCount(this)">💀 <span>89</span></button>
+                        <button type="button" class="share-btn" onclick="shareMeme('Meme #2 - Tag Your Friends')">Share</button>
+                    </div>
+                </div>
             </div>
-            <div class="meme-card">
+
+            <div class="meme-card" data-category="relatable">
                 <img src="https://picsum.photos/id/1062/500/500" alt="Meme 3">
-                <div class="meme-caption">Meme #3 - Mood Today</div>
+                <div class="meme-body">
+                    <span class="meme-tag">Relatable</span>
+                    <div class="meme-caption">Meme #3 - Mood Today</div>
+                    <div class="reaction-row">
+                        <button type="button" class="react-btn" onclick="bumpCount(this)">😂 <span>167</span></button>
+                        <button type="button" class="react-btn" onclick="bumpCount(this)">🔥 <span>94</span></button>
+                        <button type="button" class="share-btn" onclick="shareMeme('Meme #3 - Mood Today')">Share</button>
+                    </div>
+                </div>
             </div>
         </div>
-        
+
+        <!-- 4. PROMOTION BOOKING SECTION -->
+        <div id="book-promo" class="section-title">💼 Book a Promotion</div>
+        <div class="promo-grid">
+            <div class="promo-pkg">
+                <h3>Sponsored Meme Post</h3>
+                <p>Custom brand meme integrated naturally into our high-reach feed.</p>
+                <button type="button" class="select-pkg-btn" onclick="choosePackage('Sponsored Meme Post')">Select Package</button>
+            </div>
+            <div class="promo-pkg">
+                <h3>Story / Reel Shoutout</h3>
+                <p>Quick high-visibility story or short video feature with link/tag.</p>
+                <button type="button" class="select-pkg-btn" onclick="choosePackage('Story / Reel Shoutout')">Select Package</button>
+            </div>
+            <div class="promo-pkg">
+                <h3>Event / Campaign Combo</h3>
+                <p>Multi-post push for events, launches, pages, or seasonal promos.</p>
+                <button type="button" class="select-pkg-btn" onclick="choosePackage('Event / Campaign Combo')">Select Package</button>
+            </div>
+        </div>
+
+        <div class="booking-card">
+            <form id="promoBookingForm" onsubmit="handleBookingSubmit(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="clientName">Your Name *</label>
+                        <input type="text" id="clientName" class="form-control" placeholder="e.g., Kasun Perera" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="brandName">Brand / Page / Business Name *</label>
+                        <input type="text" id="brandName" class="form-control" placeholder="e.g., Urban Bites LK" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contactInfo">WhatsApp / Phone / Email *</label>
+                        <input type="text" id="contactInfo" class="form-control" placeholder="e.g., 07X XXX XXXX or email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="promoPackage">Promotion Type</label>
+                        <select id="promoPackage" class="form-control">
+                            <option value="Sponsored Meme Post">Sponsored Meme Post</option>
+                            <option value="Story / Reel Shoutout">Story / Reel Shoutout</option>
+                            <option value="Event / Campaign Combo">Event / Campaign Combo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="promoNotes">Campaign Details / Preferred Date</label>
+                    <textarea id="promoNotes" rows="3" class="form-control" placeholder="Tell us what you are promoting, target link, or preferred posting date..."></textarea>
+                </div>
+                <div class="booking-actions">
+                    <button type="submit" class="submit-btn">Generate Booking Request</button>
+                </div>
+            </form>
+
+            <div id="bookingPreview" class="booking-preview">
+                <pre id="bookingSummaryText"></pre>
+                <div class="booking-actions">
+                    <button type="button" class="copy-btn" onclick="copyBookingText()">📋 Copy Details</button>
+                    <button type="button" class="wa-btn" onclick="sendBookingWhatsApp()">💬 Send on WhatsApp</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. SOCIAL MEDIA LINKS SECTION -->
         <div class="section-title">🌐 Follow Us On Social Media</div>
         <div class="social-container">
-            <a href="https://facebook.com" target="_blank" class="social-btn fb">Facebook Page</a>
-            <a href="https://tiktok.com" target="_blank" class="social-btn tiktok">TikTok Profile</a>
-            <a href="https://instagram.com" target="_blank" class="social-btn insta">Instagram Page</a>
+            <a href="https://facebook.com/YOUR_PAGE_NAME" target="_blank" rel="noopener noreferrer" class="social-btn fb">Facebook Page</a>
+            <a href="https://tiktok.com/@YOUR_USERNAME" target="_blank" rel="noopener noreferrer" class="social-btn tiktok">TikTok Profile</a>
+            <a href="https://instagram.com/YOUR_USERNAME" target="_blank" rel="noopener noreferrer" class="social-btn insta">Instagram Page</a>
         </div>
     </div>
-    
+
+    <!-- 6. FOOTER SECTION -->
     <div class="footer">
         © 2026 Oshy Memes. All Rights Reserved.
     </div>
 
-</body>
-</html>
+    <script>
+        const WHATSAPP_NUMBER = '94700000000'; // Replace with your WhatsApp number (94 + number, no +)
+        let latestBookingMessage = '';
+
+        function filterMemes(category, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.meme-card').forEach(card => {
+                const match = category === 'all' || card.dataset.category === category;
+                card.style.display = match ? 'block' : 'none';
+            });
+        }
+        function bumpCount(btn) {
+            const span = btn.querySelector('span');
+            span.textContent = parseInt(span.textContent, 10) + 1;
+        }
+        function shareMeme(title) {
+            const text = title + ' - Check out Oshy Meme Hub!';
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text);
+                alert('Copied meme text to share: ' + text);
+            } else {
+                alert(text);
+            }
+        }
+        function choosePackage(pkgName) {
+            const select = document.getElementById('promoPackage');
+            select.value = pkgName;
+            document.getElementById('promoBookingForm').scrollIntoView({ behavior: 'smooth' });
+        }
+        function handleBookingSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('clientName').value.trim();
+            const brand = document.getElementById('brandName').value.trim();
+            const contact = document.getElementById('contactInfo').value.trim();
+            const pkg = document.getElementById('promoPackage').value;
+            const notes = document.getElementById('promoNotes').value.trim() || 'Not specified';
+
+            latestBookingMessage =
+                '🔥 Oshy Meme Hub - Promotion Booking Request\n'
+                + '• Client: ' + name + '\n'
+                + '• Brand/Page: ' + brand + '\n'
+                + '• Contact: ' + contact + '\n'
+                + '• Package: ' + pkg + '\n'
+                + '• Notes/Date: ' + notes;
+
+            document.getElementById('bookingSummaryText').textContent = latestBookingMessage;
+            const preview = document.getElementById('bookingPreview');
+            preview.style.display = 'block';
+            preview.scrollIntoView({ behavior: 'smooth
